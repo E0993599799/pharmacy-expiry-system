@@ -65,7 +65,7 @@ export default function DashboardLayout({
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-gray-900 text-white min-h-screen">
+        <aside className="w-64 bg-gray-900 text-white min-h-screen overflow-y-auto">
           <nav className="p-4 space-y-2">
             <Link href="/dashboard">
               <div className="px-4 py-2 rounded hover:bg-gray-800">
@@ -82,11 +82,41 @@ export default function DashboardLayout({
                 📋 บันทึกอายุการใช้
               </div>
             </Link>
+
+            {/* Phase 2 Features */}
+            <div className="border-t border-gray-700 mt-4 pt-4">
+              <p className="text-xs text-gray-400 px-4 mb-2">PHASE 2</p>
+              <Link href="/dashboard/expiry-records/photo-entry">
+                <div className="px-4 py-2 rounded hover:bg-gray-800 text-sm">
+                  📷 บันทึกจากรูป
+                </div>
+              </Link>
+              <Link href="/dashboard/expiry-records/pdf-upload">
+                <div className="px-4 py-2 rounded hover:bg-gray-800 text-sm">
+                  📄 นำเข้า PDF
+                </div>
+              </Link>
+              <Link href="/dashboard/exports">
+                <div className="px-4 py-2 rounded hover:bg-gray-800 text-sm">
+                  📥 ส่งออก & แจ้ง
+                </div>
+              </Link>
+            </div>
+
             <Link href="/dashboard/reports">
               <div className="px-4 py-2 rounded hover:bg-gray-800">
                 📈 รายงาน
               </div>
             </Link>
+
+            {/* Settings */}
+            <div className="border-t border-gray-700 mt-4 pt-4">
+              <Link href="/dashboard/settings/line-bot">
+                <div className="px-4 py-2 rounded hover:bg-gray-800 text-sm">
+                  🤖 LINE Bot
+                </div>
+              </Link>
+            </div>
           </nav>
         </aside>
 
