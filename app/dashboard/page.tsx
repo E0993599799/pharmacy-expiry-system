@@ -151,7 +151,7 @@ export default function DashboardPage() {
         <div className="card bg-green-50 border-l-4 border-green-500">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm font-medium">ปลอดภัย (>90 วัน)</p>
+              <p className="text-gray-600 text-sm font-medium">ปลอดภัย (&gt;90 วัน)</p>
               <p className="text-3xl font-bold text-green-600">
                 {Math.max(0, stats.total_products - stats.expired - stats.expiring_30_days - stats.expiring_60_days - stats.expiring_90_days)}
               </p>
