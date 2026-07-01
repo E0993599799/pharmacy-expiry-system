@@ -40,15 +40,8 @@ CREATE TABLE expiry_records (
   ai_extracted_json JSONB,
   ai_confidence NUMERIC(3, 2),
   confirmation_status VARCHAR(50) DEFAULT 'unconfirmed' CHECK (confirmation_status IN ('unconfirmed', 'confirmed', 'rejected')),
-  risk_level VARCHAR(50) GENERATED ALWAYS AS (
-    CASE
-      WHEN expiry_date < CURRENT_DATE THEN 'expired'
-      WHEN expiry_date <= CURRENT_DATE + INTERVAL '30 days' THEN 'critical'
-      WHEN expiry_date <= CURRENT_DATE + INTERVAL '60 days' THEN 'high'
-      WHEN expiry_date <= CURRENT_DATE + INTERVAL '90 days' THEN 'medium'
-      ELSE 'normal'
-    END
-  ) STORED,
+  risk_level VARCHAR(50) DEFAULT 'normal',
+  needs_review BOOLEAN DEFAULT false,
   created_by UUID,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
