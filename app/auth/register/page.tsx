@@ -3,8 +3,11 @@
 import GoogleSignIn from '@/app/components/GoogleSignIn'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase/client'
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -35,9 +38,22 @@ export default function RegisterPage() {
     }
 
     try {
-      // Email/password registration placeholder
-      // TODO: Implement via Supabase auth.signUp
-      setError('Email/password registration coming soon. Use Gmail for now.')
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+
+      if (signUpError) {
+        setError(signUpError.message)
+        return
+      }
+
+      setSuccess(true)
+
+      // Auto-login and redirect
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 2000)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Registration failed')
     } finally {

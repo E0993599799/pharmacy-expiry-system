@@ -25,6 +25,41 @@ export async function signInWithGoogle() {
   return data
 }
 
+export async function signInWithEmail(email: string, password: string) {
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+
+  if (error) {
+    console.error('Email sign-in error:', error)
+    throw error
+  }
+
+  return data
+}
+
+export async function signUpWithEmail(email: string, password: string) {
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/auth/callback`,
+    },
+  })
+
+  if (error) {
+    console.error('Email sign-up error:', error)
+    throw error
+  }
+
+  return data
+}
+
 export async function signOut() {
   const supabase = createClient()
   const { error } = await supabase.auth.signOut()
