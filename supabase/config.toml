@@ -1,0 +1,20 @@
+# Supabase Local Configuration
+# Generated: 2026-07-02
+
+[project]
+project_id = "drillmssdmwnbbcyldif"
+
+[auth]
+# Google OAuth Configuration
+enable_google_oauth = true
+google_client_id = "REPLACE_WITH_YOUR_GOOGLE_CLIENT_ID"
+google_client_secret = "REPLACE_WITH_YOUR_GOOGLE_CLIENT_SECRET"
+
+# Email/Password Auth
+enable_email_password = true
+enable_email_confirmations = false
+
+[database]
+# Connection settings
+host = "localhost"
+port = 5432
