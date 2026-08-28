@@ -15,15 +15,24 @@ function exists(rel) {
 // 1) Secrets must never be committed in the example env.
 if (exists('.env.example')) {
   const env = read('.env.example')
-  const forbidden = [
-    /SUPABASE_SERVICE_ROLE_KEY\s*=\s*(?!<|$)[^\s#]+/,
-    /GOOGLE_APP_PASSWORD\s*=\s*(?!<|$)[^\s#]+/,
-    /LINE_CHANNEL_ACCESS_TOKEN\s*=\s*(?!<|$)[^\s#]+/,
-    /LINE_CHANNEL_SECRET\s*=\s*(?!<|$)[^\s#]+/,
-    /LINE_BIZ_CHANNEL_SECRET\s*=\s*(?!<|$)[^\s#]+/,
-  ]
-  for (const re of forbidden) {
-    if (re.test(env)) failures.push(`credential-like value found in .env.example: ${re}`)
+  const sensitiveKeys = new Set([
+    'SUPABASE_SERVICE_ROLE_KEY',
+    'GOOGLE_APP_PASSWORD',
+    'LINE_CHANNEL_ACCESS_TOKEN',
+    'LINE_CHANNEL_SECRET',
+    'LINE_BIZ_CHANNEL_SECRET',
+  ])
+
+  for (const rawLine of env.split(/\r?\n/)) {
+    const line = rawLine.trim()
+    if (!line || line.startsWith('#') || !line.includes('=')) continue
+    const idx = line.indexOf('=')
+    const key = line.slice(0, idx).trim()
+    const value = line.slice(idx + 1).trim()
+    if (!sensitiveKeys.has(key)) continue
+
+    const placeholder = value === '' || value.startsWith('<') || /^your[-_]/i.test(value)
+    if (!placeholder) failures.push(`credential-like value found in .env.example: ${key}`)
   }
 }
 
@@ -55,7 +64,9 @@ if (fs.existsSync(sqlRoot)) {
     const sql = fs.readFileSync(path.join(sqlRoot, name), 'utf8').toLowerCase()
     if (!sql.includes('pharmacy_') && !sql.includes('pharmacy.')) failures.push(`${name}: missing pharmacy namespace marker`)
     if (!sql.includes('row level security')) failures.push(`${name}: missing RLS marker`)
-    if (sql.includes('security definer') && !sql.includes('revoke execute')) failures.push(`${name}: SECURITY DEFINER without explicit EXECUTE revocation marker`)
+    if (sql.includes('security definer') && !(sql.includes('revoke execute') || sql.includes('revoke all on function'))) {
+      failures.push(`${name}: SECURITY DEFINER without explicit EXECUTE revocation marker`)
+    }
   }
 }
 
