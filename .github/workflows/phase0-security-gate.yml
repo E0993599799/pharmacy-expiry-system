@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  phase0-static:
+  phase0-security:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,3 +20,5 @@ jobs:
           node-version: 24
       - name: Run Phase 0 static gate
         run: node scripts/phase0-static-gate.mjs
+      - name: Run Phase 0 contract tests
+        run: node --test tests/phase0-contract.test.mjs
