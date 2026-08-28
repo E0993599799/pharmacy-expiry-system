@@ -1,0 +1,12 @@
+{
+  "project": "pharmacy-expiry-system",
+  "repository": "E0993599799/pharmacy-expiry-system",
+  "canonical_rfc": "E0993599799/mission-control#251",
+  "phase": "0",
+  "phase_name": "security-data-invariants",
+  "status": "in_progress",
+  "baseline_ref": "1180fad4f004911691609e695f08a783c93178e1",
+  "baseline_classification": "legacy-unverified-pre-rfc",
+  "feature_implementation_allowed": false,
+  "proof_required": true
+}
