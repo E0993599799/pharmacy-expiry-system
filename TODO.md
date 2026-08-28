@@ -17,7 +17,7 @@
 - [ ] Rotate/revoke all credentials exposed in Git history and prove old values fail.
 - [x] Draft pharmacy-scoped shared-Supabase isolation/RBAC contract without applying it to production.
 - [x] Implement minimum repository-level Phase 0 static enforcement and contract-test scaffolding.
-- [ ] Obtain a successful CI run for the Phase 0 security gate.
+- [x] Obtain a successful CI run for the Phase 0 security gate.
 - [ ] Execute database-level negative tests against a verified non-production/shared-project-safe target.
 - [ ] Produce executable repeatable database proof under proof/phase0/.
 - [ ] Review proof before opening any feature implementation phase.
