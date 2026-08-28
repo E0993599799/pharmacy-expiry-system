@@ -3,15 +3,19 @@
 - [x] Create isolated Phase 0 branch from legacy master.
 - [x] Establish PROJECT.md and PLAN.md.
 - [ ] Inventory legacy code and classify KEEP / REWRITE / QUARANTINE / REMOVE.
-- [ ] Map existing Supabase tables, policies, functions, buckets and credentials used by this repo.
-- [ ] Write explicit trust-boundary and data-ownership matrix.
-- [ ] Define backend RBAC matrix and negative tests.
-- [ ] Define KHY12 backend attachment invariant and tests.
-- [ ] Define Rx-only approve/print invariant and tests.
-- [ ] Define idempotency/concurrency/stale-write contracts.
-- [ ] Define evidence immutability, audit and print-version contracts.
-- [ ] Define recovery/rollback/failure-injection test matrix.
-- [ ] Define upload/PDF/worker/retry/time/resource budgets.
+- [x] Map legacy Supabase schema/RLS/auth helper and credential exposure known from repository audit.
+- [ ] Map live Supabase tables, policies, functions and buckets for the actual shared project once verified access is available.
+- [x] Write explicit trust-boundary and data-ownership matrix.
+- [x] Define backend RBAC negative-test contract.
+- [x] Define KHY12 backend attachment invariant and tests.
+- [x] Define Rx-only approve/print/complete invariant and tests.
+- [x] Define idempotency/concurrency/stale-write negative tests.
+- [x] Define evidence immutability/audit negative tests.
+- [x] Define recovery/rollback/failure-injection test matrix.
+- [x] Define upload/PDF/worker/retry/time/resource negative-test requirements.
+- [x] Sanitize exposed credentials from `.env.example` on master and Phase 0 branch.
+- [ ] Rotate/revoke all credentials exposed in Git history and prove old values fail.
+- [ ] Reconcile legacy public-schema design with approved shared-Supabase isolation strategy.
 - [ ] Implement only the minimum Phase 0 enforcement/test scaffolding needed to prove invariants.
-- [ ] Produce repeatable proof under proof/phase0/.
+- [ ] Produce executable repeatable proof under proof/phase0/.
 - [ ] Review proof before opening any feature implementation phase.
