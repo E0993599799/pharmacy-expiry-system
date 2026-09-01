@@ -42,7 +42,6 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white shadow">
         <div className="container flex items-center justify-between py-4">
           <div>
@@ -64,12 +63,16 @@ export default function DashboardLayout({
       </header>
 
       <div className="flex">
-        {/* Sidebar */}
         <aside className="w-64 bg-gray-900 text-white min-h-screen overflow-y-auto">
           <nav className="p-4 space-y-2">
             <Link href="/dashboard">
               <div className="px-4 py-2 rounded hover:bg-gray-800">
                 📊 แดชบอร์ด
+              </div>
+            </Link>
+            <Link href="/dashboard/operations">
+              <div className="px-4 py-2 rounded hover:bg-gray-800">
+                🧭 Operations
               </div>
             </Link>
             <Link href="/dashboard/products">
@@ -83,7 +86,6 @@ export default function DashboardLayout({
               </div>
             </Link>
 
-            {/* Phase 2 Features */}
             <div className="border-t border-gray-700 mt-4 pt-4">
               <p className="text-xs text-gray-400 px-4 mb-2">PHASE 2</p>
               <Link href="/dashboard/expiry-records/photo-entry">
@@ -109,7 +111,6 @@ export default function DashboardLayout({
               </div>
             </Link>
 
-            {/* Settings */}
             <div className="border-t border-gray-700 mt-4 pt-4">
               <Link href="/dashboard/settings/line-bot">
                 <div className="px-4 py-2 rounded hover:bg-gray-800 text-sm">
@@ -120,7 +121,6 @@ export default function DashboardLayout({
           </nav>
         </aside>
 
-        {/* Main Content */}
         <main className="flex-1 p-8">
           {children}
         </main>
