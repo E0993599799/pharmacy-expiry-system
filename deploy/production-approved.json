@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "status": "PRODUCTION_DEPLOY_APPROVED",
+  "approved_at": "2026-09-01T14:00:00Z",
+  "source": "user_explicit_approval",
+  "target": "vercel:prj_BE1k76SJzn94y448J7X32MjZ6rfv",
+  "runtime_branch": "master",
+  "verified_stack_source": "mission-control main / pharmacy Phase 1-7"
+}
