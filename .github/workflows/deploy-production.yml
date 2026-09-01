@@ -1,0 +1,70 @@
+name: Pharmacy Production Deploy
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'deploy/production-approved.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  VERCEL_ORG_ID: team_OS8nENECHPCuieeZsEhya9sF
+  VERCEL_PROJECT_ID: prj_BE1k76SJzn94y448J7X32MjZ6rfv
+
+jobs:
+  verify-and-deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Verify production deployment credential exists
+        shell: bash
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo 'VERCEL_TOKEN secret is missing; refusing production deploy.' >&2
+            exit 1
+          fi
+
+      - name: Install application dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Runtime contract proof
+        run: node tests/operations-proof.mjs
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Link exact Vercel production project
+        shell: bash
+        run: |
+          mkdir -p .vercel
+          printf '{"orgId":"%s","projectId":"%s"}\n' "$VERCEL_ORG_ID" "$VERCEL_PROJECT_ID" > .vercel/project.json
+
+      - name: Pull production environment
+        run: npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build with production environment
+        run: npx vercel@latest build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy prebuilt artifact to production
+        id: deploy
+        shell: bash
+        run: |
+          set -o pipefail
+          npx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN" | tee /tmp/vercel-deploy.txt
+          tail -n 1 /tmp/vercel-deploy.txt > /tmp/production-url.txt
+
+      - name: Production URL proof
+        shell: bash
+        run: |
+          echo "PRODUCTION_URL=$(cat /tmp/production-url.txt)"
