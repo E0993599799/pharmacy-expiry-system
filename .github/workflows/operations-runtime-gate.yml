@@ -4,6 +4,7 @@ on:
   push:
     branches: [master]
     paths:
+      - 'app/page.tsx'
       - 'app/dashboard/operations/**'
       - 'app/dashboard/layout.tsx'
       - 'tests/operations-proof.mjs'
