@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "status": "PRODUCTION_DEPLOY_APPROVED",
-  "approved_at": "2026-09-01T15:16:00Z",
-  "source": "user_explicit_landing_page_change",
+  "approved_at": "2026-09-01T18:19:00Z",
+  "source": "user_explicit_landing_design_approval",
   "target": "vercel:prj_BE1k76SJzn94y448J7X32MjZ6rfv",
   "runtime_branch": "master",
   "verified_stack_source": "pharmacy-expiry-system master",
-  "change": "Rename landing page to Pharmacy Management Program"
+  "change": "Minimal dark-blue landing page with Expiry management, ED Project document, and Temperature monitoring system"
 }
