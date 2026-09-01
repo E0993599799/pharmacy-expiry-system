@@ -1,0 +1,24 @@
+name: Operations Runtime Gate
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'app/dashboard/operations/**'
+      - 'app/dashboard/layout.tsx'
+      - 'tests/operations-proof.mjs'
+      - '.github/workflows/operations-runtime-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  operations-proof:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node tests/operations-proof.mjs
