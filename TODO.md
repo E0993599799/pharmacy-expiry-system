@@ -1,0 +1,23 @@
+# Phase 0 TODO
+
+- [x] Create isolated Phase 0 branch from legacy master.
+- [x] Establish PROJECT.md and PLAN.md.
+- [x] Inventory legacy code and classify KEEP / REWRITE / QUARANTINE / REMOVE.
+- [x] Map legacy Supabase schema/RLS/auth helper and credential exposure known from repository audit.
+- [ ] Map live Supabase tables, policies, functions and buckets for the actual shared project once verified access is available.
+- [x] Write explicit trust-boundary and data-ownership matrix.
+- [x] Define backend RBAC negative-test contract.
+- [x] Define KHY12 backend attachment invariant and tests.
+- [x] Define Rx-only approve/print/complete invariant and tests.
+- [x] Define idempotency/concurrency/stale-write negative tests.
+- [x] Define evidence immutability/audit negative tests.
+- [x] Define recovery/rollback/failure-injection test matrix.
+- [x] Define upload/PDF/worker/retry/time/resource negative-test requirements.
+- [x] Sanitize exposed credentials from `.env.example` on master and Phase 0 branch.
+- [ ] Rotate/revoke all credentials exposed in Git history and prove old values fail.
+- [x] Draft pharmacy-scoped shared-Supabase isolation/RBAC contract without applying it to production.
+- [x] Implement minimum repository-level Phase 0 static enforcement and contract-test scaffolding.
+- [x] Obtain a successful CI run for the Phase 0 security gate.
+- [ ] Execute database-level negative tests against a verified non-production/shared-project-safe target.
+- [ ] Produce executable repeatable database proof under proof/phase0/.
+- [ ] Review proof before opening any feature implementation phase.

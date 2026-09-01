@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "phase0:static": "node scripts/phase0-static-gate.mjs"
   },
   "dependencies": {
     "react": "^18.3.0",
